@@ -62,8 +62,8 @@ del y_np
 x_output = x_output.cpu().detach().numpy() * 255.0
 x_output = np.transpose(np.reshape(x_output, (M,N)))
 
-PSNR_noisy = 10 * np.log10(np.mean(np.power(Ii*1.0,2)) / np.mean(np.power((1.0*Ii-noisy_image),2)))
-PSNR_output = 10 * np.log10(np.mean(np.power(Ii*1.0,2)) / np.mean(np.power((1.0*Ii-x_output),2))) 
+SNR_noisy = 10 * np.log10(np.mean(np.power(Ii*1.0,2)) / np.mean(np.power((1.0*Ii-noisy_image),2)))
+PSNR_output = 10 * np.log10(np.power(255.0,2) / np.mean(np.power((1.0*Ii-x_output),2))) 
 
 plt.figure(figsize=(12,12))
 plt.subplot(1,3,1)
@@ -74,7 +74,7 @@ plt.imshow(Ii, cmap='gray')
 plt.subplot(1,3,2)
 plt.xticks([])
 plt.yticks([])
-plt.title('Noisy. PSNR: %.2f dB'%(PSNR_noisy))
+plt.title('Noisy. SNR: %.2f dB'%(SNR_noisy))
 plt.imshow(noisy_image, cmap='gray')
 plt.subplot(1,3,3)
 plt.xticks([])
